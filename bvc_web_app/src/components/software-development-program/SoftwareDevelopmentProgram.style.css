@@ -1,0 +1,40 @@
+* {
+    /* text-align:  left; */
+}
+
+.main {
+    text-align:  left;
+    padding-left: 2%;
+}
+
+.tableStyle {
+    border-collapse: collapse;
+    border: 1px solid;
+    text-align: center;
+    padding: 10px 15px 15px 10px;
+    margin-left: 5%;
+}
+
+h1 {
+    padding-top: 3%;
+}
+
+p {
+    text-align: left;
+    padding-left: 4%;
+}
+
+table {
+    padding-left: 5%;
+    text-align: center;
+}
+
+/* th {
+    padding: 10px 50px 20px 10px;
+    text-align: center;
+}
+
+tr {
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+} */

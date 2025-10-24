@@ -1,13 +1,23 @@
+// import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import {Route, Routes} from "react-router-dom";
+// import SoftwareDevelopmentProgram from './components/software-development-program/SoftwareDevelopmentProgram.component';
+import SoftwareDevelopmentProgramRoute from "./routes/software-development-program/SoftwareDevelopmentProgram";
 
-import './App.css';
+// import Homepage from "./components/homepage/Homepage.component";
 
-import SoftwareDevelopmentProgram from './components/software-development-program/SoftwareDevelopmentProgram.component';
 
 function App() {
   return (
     <div className="App">
-        <SoftwareDevelopmentProgram/>
+        <SoftwareDevelopmentProgramRoute/>
+        {/* <Homepage /> */}
     </div>
+    // <div>
+    //   <Routes>
+    //     <Route path="Diploma" element={<SoftwareDevelopmentProgramRoute/>}/>
+    //   </Routes>
+    // </div>
   );
 }
 
