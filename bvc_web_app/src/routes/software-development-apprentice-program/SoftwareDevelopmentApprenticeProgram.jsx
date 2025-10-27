@@ -1,5 +1,5 @@
 import React from "react";
-import SoftwareDevelopmentApprenticeProgram from "../../components/homepage/software-development-apprentice-program/SoftwareDevelopmentApprenticeProgram.component";
+import SoftwareDevelopmentApprenticeProgram from "../../components/software-development-apprentice-program/SoftwareDevelopmentApprenticeProgram.component";
 
 function SoftwareDevelopmentApprenticeProgramRoute() {
     return <SoftwareDevelopmentApprenticeProgram/>
