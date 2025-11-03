@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useStore } from './context/Store.jsx'
+import { useStore } from "../context/Store";
 
 function Nav() {
   const { state, logout } = useStore()

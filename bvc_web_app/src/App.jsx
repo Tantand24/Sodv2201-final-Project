@@ -30,10 +30,6 @@ export default function App(){
           <Route path="/register" element={<RequireAuth><Register /></RequireAuth>} />
           <Route path="/contact" element={<RequireAuth><Contact /></RequireAuth>} />
           <Route path="*" element={<NotFound />} />
-          <SoftwareDevelopmentProgramRoute/>
-          <SoftwareDevelopmentApprenticeProgramRoute/>
-          <SoftwareDevelopmentPostDiplomaRoute/>
-        <Home/>
         </Routes>
       </div>
     </>
