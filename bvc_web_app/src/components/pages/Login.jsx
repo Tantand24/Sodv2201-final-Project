@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useStore } from '../context/Store.jsx'
+import { useStore } from '../components/context/Store.jsx'
 
 export default function Login(){
   const { login } = useStore()

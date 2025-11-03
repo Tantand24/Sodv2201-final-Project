@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import TermPicker from '../components/TermPicker.jsx'
 import CourseCard from '../components/CourseCard.jsx'
 import CourseCart from '../components/CourseCart.jsx'
-import { useStore } from '../context/Store.jsx'
+import { useStore } from '../components/context/Store.jsx'
 
 export default function Courses(){
   const { state, helpers } = useStore()

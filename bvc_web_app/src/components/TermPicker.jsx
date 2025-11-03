@@ -1,5 +1,5 @@
-import { TERMS } from '../data/mockData.js'
-import { useStore } from '../context/Store.jsx'
+import { TERMS } from './data/mockData.js'
+import { useStore } from './context/Store.jsx'
 
 export default function TermPicker(){
   const { state, setTerm } = useStore()

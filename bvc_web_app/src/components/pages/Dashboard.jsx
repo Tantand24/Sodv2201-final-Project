@@ -1,4 +1,4 @@
-import { useStore } from '../context/Store.jsx'
+import { useStore } from '../components/context/Store.jsx'
 
 export default function Dashboard(){
   const { state } = useStore()

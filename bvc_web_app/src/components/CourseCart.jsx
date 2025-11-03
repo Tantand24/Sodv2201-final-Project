@@ -1,4 +1,4 @@
-import { useStore } from '../context/Store.jsx'
+import { useStore } from './context/Store.jsx'
 
 export default function CourseCart(){
   const { state, removeFromCart } = useStore()

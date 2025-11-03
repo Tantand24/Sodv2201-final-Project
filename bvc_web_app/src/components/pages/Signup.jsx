@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useStore } from '../context/Store.jsx'
-import { PROGRAMS } from '../data/mockData.js'
+import { useStore } from '../components/context/Store.jsx'
+import { PROGRAMS } from '../components/data/mockData.js'
 
 export default function Signup(){
   const [form, setForm] = useState({

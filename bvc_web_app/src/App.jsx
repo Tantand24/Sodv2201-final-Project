@@ -1,50 +1,24 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom'
-import Signup from './pages/Signup.jsx'
-import Login from './pages/Login.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import Profile from './pages/Profile.jsx'
-import Courses from './pages/Courses.jsx'
-import Register from './pages/Register.jsx'
-import Contact from './pages/Contact.jsx'
-import NotFound from './pages/NotFound.jsx'
-import { useStore } from './context/Store.jsx'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Signup from './components/pages/Signup.jsx'
+import Login from './components/pages/Login.jsx'
+import Dashboard from './components/pages/Dashboard.jsx'
+import Profile from './components/pages/Profile.jsx'
+import Courses from './components/pages/Courses.jsx'
+import Register from './components/pages/Register.jsx'
+import Contact from './components/pages/Contact.jsx'
+import NotFound from './components/pages/NotFound.jsx'
+import Nav from './components/navigation/Navigation.component.jsx'
+import SoftwareDevelopmentProgramRoute from "./routes/software-development-program/SoftwareDevelopmentProgram";
+import SoftwareDevelopmentApprenticeProgramRoute from './routes/software-development-apprentice-program/SoftwareDevelopmentApprenticeProgram';
+import SoftwareDevelopmentPostDiplomaRoute from './routes/software-development-post-diploma/SoftwareDevelopmentPostDiploma';
 
-function Nav() {
-  const { state, logout } = useStore()
-  return (
-    <div className="nav">
-      <div className="flex">
-        <Link to="/" className="brand">Bow Registration</Link>
-        <span className="badge">A1 Frontend (Mock Data)</span>
-      </div>
-      <div className="navlinks">
-        {!state.user && (
-          <>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
-          </>
-        )}
-        {state.user && (
-          <>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/courses">Courses</Link>
-            <Link to="/register">Register</Link>
-            <Link to="/contact">Contact</Link>
-            <button className="btn alt" onClick={logout}>Logout</button>
-          </>
-        )}
-        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-    </div>
-  )
-}
+import Home from './routes/home/home.component';
 
 export default function App(){
   const { state } = useStore()
   return (
     <>
-      <Nav />
+      <Nav/>
       <div className="container">
         <Routes>
           <Route path="/" element={<Navigate to={state.user ? '/dashboard' : '/signup'} />} />
@@ -56,6 +30,10 @@ export default function App(){
           <Route path="/register" element={<RequireAuth><Register /></RequireAuth>} />
           <Route path="/contact" element={<RequireAuth><Contact /></RequireAuth>} />
           <Route path="*" element={<NotFound />} />
+          <SoftwareDevelopmentProgramRoute/>
+          <SoftwareDevelopmentApprenticeProgramRoute/>
+          <SoftwareDevelopmentPostDiplomaRoute/>
+        <Home/>
         </Routes>
       </div>
     </>

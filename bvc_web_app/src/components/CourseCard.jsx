@@ -1,4 +1,4 @@
-import { useStore } from '../context/Store.jsx'
+import { useStore } from './context/Store.jsx'
 
 export default function CourseCard({ c, selectedTerm }){
   const { addToCart, removeFromCart, state, helpers } = useStore()
