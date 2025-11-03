@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useStore } from './components/context/Store.jsx'
 import Signup from './components/pages/Signup.jsx'
 import Login from './components/pages/Login.jsx'
 import Dashboard from './components/pages/Dashboard.jsx'
