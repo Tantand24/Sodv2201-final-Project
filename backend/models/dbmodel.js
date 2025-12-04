@@ -2,6 +2,7 @@ import { poolPromise } from "../config/db";
 import sql from 'mssql'
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //user = gets all courses under specifed username
 export const getAllUserCourses = async (username) => {
     const pool = await poolPromise;
@@ -28,6 +29,8 @@ export const registerUser = async (username, password, firstName, lastName, emai
         .input('program', sql.VarChar, program)
         .query('INSERT INTO Users (username, password, firstName, lastName, email, phone, birthday, department, program) VALUES (@username, @password, @firstName, @lastName, @email, @phone, @birthday, @department, @program)')
 =======
+=======
+>>>>>>> Stashed changes
 // Example: get a single user by username
 export const getUserByUsername = async (username) => {
   const pool = await poolPromise;
@@ -61,5 +64,8 @@ export const getAllcourse = async () => {
   .request()
   .query(`
     `)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

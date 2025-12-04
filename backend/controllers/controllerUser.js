@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { getAllUserCourses, registerUser} from '../models/dbmodel';
@@ -46,6 +47,8 @@ export const registerUserController = async (req, res) => {
 
 //log out
 =======
+=======
+>>>>>>> Stashed changes
 import bcrypt from 'bcrypt';
 import generateToken from '../utils/gentoken.js';
 import { getUserByUsername } from '../models/dbmodel.js';
@@ -101,4 +104,7 @@ export const loginUser = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
