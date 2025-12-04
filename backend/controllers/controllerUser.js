@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { getAllUserCourses, registerUser} from '../models/dbmodel';
@@ -44,3 +45,60 @@ export const registerUserController = async (req, res) => {
 //log in
 
 //log out
+=======
+import bcrypt from 'bcrypt';
+import generateToken from '../utils/gentoken.js';
+import { getUserByUsername } from '../models/dbmodel.js';
+
+// POST /api/auth/login
+// Handles student login
+export const loginUser = async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: 'Username and password are required' });
+  }
+
+  try {
+    const user = await getUserByUsername(username);
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // TODO: update 'passwordHash' to match your actual column name
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const token = generateToken({
+      id: user.id,                // TODO: change to your PK column
+      role: user.role || 'student',
+    });
+
+    // Save token in HTTP-only cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false, // set true in production (HTTPS)
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    });
+
+    return res.json({
+      message: 'Student login successful',
+      user: {
+        id: user.id,
+        username: user.username,
+        role: user.role || 'student',
+      },
+    });
+  } catch (err) {
+    console.error('loginUser error:', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+>>>>>>> Stashed changes

@@ -1,6 +1,7 @@
 import { poolPromise } from "../config/db";
 import sql from 'mssql'
 
+<<<<<<< Updated upstream
 //user = gets all courses under specifed username
 export const getAllUserCourses = async (username) => {
     const pool = await poolPromise;
@@ -26,4 +27,39 @@ export const registerUser = async (username, password, firstName, lastName, emai
         .input('department', sql.VarChar, department)
         .input('program', sql.VarChar, program)
         .query('INSERT INTO Users (username, password, firstName, lastName, email, phone, birthday, department, program) VALUES (@username, @password, @firstName, @lastName, @email, @phone, @birthday, @department, @program)')
+=======
+// Example: get a single user by username
+export const getUserByUsername = async (username) => {
+  const pool = await poolPromise;
+
+  // TODO: change 'Users', 'username', and other column names
+  const result = await pool
+    .request()
+    .input('username', sql.VarChar, username)
+    .query(`
+      SELECT TOP 1 *
+      FROM Users       -- TODO: replace with your real table name
+      WHERE username = @username
+    `);
+
+  return result.recordset[0]; // undefined if not found
+};
+
+export const getAllStudent = async () => {
+  const pool = await poolPromise;
+
+  const result = await pool
+  .request()
+  .query(`
+    `)
+}
+
+export const getAllcourse = async () => {
+  const pool = await poolPromise;
+
+  const result = await pool
+  .request()
+  .query(`
+    `)
+>>>>>>> Stashed changes
 }

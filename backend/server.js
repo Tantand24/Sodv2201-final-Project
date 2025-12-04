@@ -1,7 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookies-parser'
 import config from './config/config.js'
-//import routes from './routes/routes.js'
+import routes from './routes/routes.js'
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.static('public'))
 
 //Route
-//app.use( , routes)
+app.use('/api', routes);
 
 //listen for server
 app.listen(config.port, () => {
