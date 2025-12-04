@@ -36,3 +36,11 @@ export const registerUserController = async (req, res) => {
         res.status(500).json({ error: 'Failed to register user' });
     }
 }
+
+//add user courses
+
+//send admin message
+
+//log in
+
+//log out
