@@ -1,12 +1,14 @@
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
-//import {variables} (when connecting frontend -> backend)
+import { getAllUserCourses, registerUser} from '../models/dbmodel';
 import { use } from 'react';
 
 //controller to get user's courses
 export const getUserCourses = async (requestAnimationFrame, res) => {
     try {
-        // const userCourses = await ;//
+        const username = req.body;
+
+        const userCourses = await getAllUserCourses(username);
         res.status(200).json(userCourses);
     }
     catch (error) {
@@ -25,7 +27,7 @@ export const registerUserController = async (req, res) => {
 
         // const hashedPassword = await bcrypt.hash(password, 10)   //later use
 
-        // await addUser(username, password, firstName, lastName, email, phone, birthday, department, program);
+        await registerUser(username, password, firstName, lastName, email, phone, birthday, department, program);
 
         res.status(201).json({message: 'User created successfully'});
     }
