@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { use } from 'react';
@@ -23,20 +21,10 @@ import { use } from 'react';
 
 //load courses
 
-//log in
-
 //log out
-=======
-import bcrypt from 'bcrypt';
-import generateToken from '../utils/gentoken.js';
+
 import { getUserByUsername } from '../models/dbmodel.js';
 
-=======
-import bcrypt from 'bcrypt';
-import generateToken from '../utils/gentoken.js';
-import { getUserByUsername } from '../models/dbmodel.js';
-
->>>>>>> Stashed changes
 // POST /api/auth/admin/login
 // Handles admin login
 export const loginAdmin = async (req, res) => {
@@ -90,7 +78,3 @@ export const loginAdmin = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

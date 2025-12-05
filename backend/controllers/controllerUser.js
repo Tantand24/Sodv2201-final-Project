@@ -1,16 +1,14 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
-import { getAllUserCourses, registerUser} from '../models/dbmodel';
+import { getAllUserCourses, registerStudent} from '../models/dbmodel';
 import { use } from 'react';
 
 //controller to get user's courses
 export const getUserCourses = async (requestAnimationFrame, res) => {
     try {
-        const username = req.body;
+        const studentID = req.body;
 
-        const userCourses = await getAllUserCourses(username);
+        const userCourses = await getAllUserCourses(studentID);
         res.status(200).json(userCourses);
     }
     catch (error) {
@@ -19,7 +17,7 @@ export const getUserCourses = async (requestAnimationFrame, res) => {
     }
 };
 
-export const registerUserController = async (req, res) => {
+export const registerStudentController = async (req, res) => {
     try {
         const {username, password, firstName, lastName, email, phone, birthday, department, program} = req.body;
 
@@ -29,7 +27,7 @@ export const registerUserController = async (req, res) => {
 
         // const hashedPassword = await bcrypt.hash(password, 10)   //later use
 
-        await registerUser(username, password, firstName, lastName, email, phone, birthday, department, program);
+        await registerStudent(username, password, firstName, lastName, email, phone, birthday, department, program);
 
         res.status(201).json({message: 'User created successfully'});
     }
@@ -43,14 +41,10 @@ export const registerUserController = async (req, res) => {
 
 //send admin message
 
-//log in
 
 //log out
-=======
-=======
->>>>>>> Stashed changes
-import bcrypt from 'bcrypt';
-import generateToken from '../utils/gentoken.js';
+
+
 import { getUserByUsername } from '../models/dbmodel.js';
 
 // POST /api/auth/login
@@ -104,7 +98,3 @@ export const loginUser = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
