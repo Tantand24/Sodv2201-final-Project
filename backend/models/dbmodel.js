@@ -25,8 +25,40 @@ export const registerStudent = async (Username, PasswordHash, FirstName, LastNam
         .input('Birthday', sql.Date, Birthday)
         .input('Department', sql.VarChar, Department)
         .input('ProgramCode', sql.VarChar, ProgramCode)
-        .query('INSERT INTO students (Username, PasswordHash, FirstName, LastName, Email, Phone, Birthday, Department, ProgramCode) VALUES (@Username, @PasswordHash, @FirstName, @LastName, @Email, @Phone, @Birthday, @Department, @ProgramCode)')
+        .query(`INSERT INTO students 
+            (Username, PasswordHash, FirstName, LastName, 
+            Email, Phone, Birthday, Department, ProgramCode) 
+            VALUES (@Username, @PasswordHash, @FirstName, @LastName, @Email, 
+            @Phone, @Birthday, @Department, @ProgramCode)`);
 }
+
+//student
+//inserts a new row in contact messages
+export const newContactMessage = async (StudentID, Subject, Message, CreatedAt) => {
+    const pool = await poolPromise;
+
+    await pool.request()
+        .input('StudentID', sql.Int, StudentID)
+        .input('Subject', sql.VarChar, Subject)
+        .input('Message', sql.VarChar, Message)
+        .input('CreatedAt', sql.Date, CreatedAt)
+        .query(`INSERT INTO contact_messages (StudentID, Subject, Message, CreatedAt) 
+          VALUES (@StudentID, @Subject, @Message, @CreatedAt)`);
+}
+
+//student
+//insert new row in registrations
+export const registerNewCourse = async (StudentID, CourseID, Term, RegisteredAt) => {
+   const pool = await poolPromise;
+
+    await pool.request()
+        .input('StudentID', sql.Int, StudentID)
+        .input('CourseID', sql.Int, CourseID)
+        .input('Term', sql.VarChar, Term)
+        .input('RegisteredAt', sql.Date, RegisteredAt)
+        .query(`INSERT INTO registrations (StudentID, CourseID, Term, RegisteredAt) 
+          VALUES (@StudentID, @CourseID, @Term, @RegisteredAt)`);
+} 
 
 //Admin 
 // Example: get a single user by username

@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
-import { getAllUserCourses, registerStudent} from '../models/dbmodel';
+import { getAllUserCourses, registerStudent, newContactMessage, registerNewCourse} from '../models/dbmodel';
 import { use } from 'react';
+//TODO - work on log in, log out
 
 //controller to get user's courses
 export const getUserCourses = async (requestAnimationFrame, res) => {
@@ -38,11 +39,41 @@ export const registerStudentController = async (req, res) => {
 }
 
 //add user courses
+export const registerCourse = async (req, res) => {
+    try {
+        const {StudentID, CourseID, Term, RegisteredAt} = req.body;
+
+        await registerNewCourse(StudentID, CourseID, Term, RegisteredAt);
+
+        res.status(201).json({message: 'Course registered successfully'});
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to post message' });
+    }
+}
 
 //send admin message
+export const registerNewContactMessage = async (req, res) => {
+    try {
+        const {StudentID, Subject, Message, CreatedAt} = req.body;
+
+        if(!StudentID || !Subject || !Message || !CreatedAt) {
+            return res.status(400).json({message: 'All fields are required'});
+        }
 
 
-//log out
+        await newContactMessage(StudentID, Subject, Message, CreatedAt);
+
+        res.status(201).json({message: 'Message posted successfully'});
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to post message' });
+    }
+}
+
+//log out - TODO
 
 
 import { getUserByUsername } from '../models/dbmodel.js';

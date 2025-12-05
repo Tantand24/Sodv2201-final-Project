@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { use } from 'react';
 import { getUserByUsername, getAllStudent, updateCourse, deleteCourse, getAllcourse, getAllContactMessages} from '../models/dbmodel.js';
-//imported from controllerUser (will update later)
+//TODO - work on log in and log out
 
 /**
  * get student messages
