@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { use } from 'react';
+import { getUserByUsername, getAllStudent, updateCourse, deleteCourse, getAllcourse} from '../models/dbmodel.js';
 //imported from controllerUser (will update later)
 
 /**
@@ -14,16 +15,62 @@ import { use } from 'react';
 /*
     view all students
 */
+export const adminViewStudents = async (req, res) => {
+  try {
+    const studentsList = await getAllStudent();
+
+    res.status(200).json(studentsList);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Failed to fetch students'});
+  }
+}
 
 //update courses
+export const adminUpdateCourse = async (req, res) => {
+  try {
+    const {CourseID, CourseCode, Name, Term, Description, StartDate, EndDate, ProgramCode} = req.body;
+
+    await updateCourse(CourseID, CourseCode, Name, Term, Description, StartDate, EndDate, ProgramCode);
+    
+    res.status(201).json({message: 'Course updated successfully'});
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Failed to update course'});
+  }
+}
 
 //delete courses
+export const adminDeleteCourse = async (req, res) => {
+  try {
+    const courseCode = req.body;
+
+    await deleteCourse(courseCode);
+    
+    res.status(201).json({message: 'Course deleted successfully'});
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Failed to delete course'});
+  }
+}
 
 //load courses
+export const adminViewCourses = async (req, res) => {
+  try {
+    const coursesList = await getAllcourse();
+
+    res.status(200).json(coursesList);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Failed to fetch courses'});
+  }
+}
 
 //log out
-
-import { getUserByUsername } from '../models/dbmodel.js';
 
 // POST /api/auth/admin/login
 // Handles admin login

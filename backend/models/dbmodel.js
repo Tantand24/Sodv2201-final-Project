@@ -50,20 +50,52 @@ export const getUserByUsername = async (Username) => {
 export const getAllStudent = async () => {
   const pool = await poolPromise;
 
-  const result = await pool
-  .request()
-  .query(`
-      SELECT *
-      FROM students`);
+  const result = await pool.request()
+    .query(`
+        SELECT *
+        FROM students`);
 
   return result.recordset;
+};
+
+//Admin
+//Deletes course specified by CourseCode
+export const deleteCourse = async (CourseCode) => {
+  const pool = await poolPromise;
+
+  const result = await pool.request()
+    .input('CourseCode', sql.VarChar, CourseCode)
+    .query('DELETE FROM courses WHERE CourseCode = @CourseCode')
+};
+
+//Admin
+//Updates course specified by CourseID
+export const updateCourse = async (CourseID, CourseCode, Name, Term, Description, StartDate, EndDate, ProgramCode) => {
+  const pool = await poolPromise;
+
+  const result = await pool.request()
+    .input('CourseID', sql.VarChar, CourseID)
+    .input('CourseCode', sql.VarChar, CourseCode)
+    .input('Name', sql.VarChar, Name)
+    .input('Term', sql.VarChar, Term)
+    .input('Description', sql.VarChar, Description)
+    .input('StartDate', sql.Date, StartDate)
+    .input('EndDate', sql.Date, EndDate)
+    .input('ProgramCode', sql.VarChar, ProgramCode)
+    .query(`UPDATE courses SET 
+      CourseCode = @CourseCode, 
+      Name = @Name,
+      Term = @Term,
+      Description = @Description,
+      StartDate = @StartDate,
+      EndDate = @EndDate,
+      ProgramCode = @ProgramCode
+      WHERE CourseID = @CourseID`)
+};
+
+export const getAllcourse = async () => {
+  const pool = await poolPromise;
+
+  const result = await pool.request()
+  .query(`SELECT * FROM courses`);
 }
-
-// export const getAllcourse = async () => {
-//   const pool = await poolPromise;
-
-//   const result = await pool
-//   .request()
-//   .query(`
-//     `);
-// }
