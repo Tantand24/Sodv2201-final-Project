@@ -93,9 +93,24 @@ export const updateCourse = async (CourseID, CourseCode, Name, Term, Description
       WHERE CourseID = @CourseID`)
 };
 
+//Admin
+//Gets all registered courses in the database
 export const getAllcourse = async () => {
   const pool = await poolPromise;
 
   const result = await pool.request()
   .query(`SELECT * FROM courses`);
+
+  return result.recordset;
+}
+
+//Admin
+//Gets all the contact Messages in the database
+export const getAllContactMessages = async () => {
+  const pool = await poolPromise;
+
+  const result = await pool.request()
+  .query(`SELECT * FROM contact_messages`);
+
+  return result.recordset;
 }

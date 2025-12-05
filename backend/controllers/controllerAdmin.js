@@ -1,16 +1,23 @@
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
 import { use } from 'react';
-import { getUserByUsername, getAllStudent, updateCourse, deleteCourse, getAllcourse} from '../models/dbmodel.js';
+import { getUserByUsername, getAllStudent, updateCourse, deleteCourse, getAllcourse, getAllContactMessages} from '../models/dbmodel.js';
 //imported from controllerUser (will update later)
 
 /**
  * get student messages
- * sender
- * subject
- * description
- * dateSent
 */
+export const adminViewContactMessages = async (req, res) => {
+  try {
+    const messagesList = await getAllContactMessages();
+
+    res.status(200).json(messagesList);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Failed to fetch messages'});
+  }
+}
 
 /*
     view all students
@@ -70,7 +77,7 @@ export const adminViewCourses = async (req, res) => {
   }
 }
 
-//log out
+//log out - TODO
 
 // POST /api/auth/admin/login
 // Handles admin login
