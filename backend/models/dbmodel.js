@@ -61,11 +61,10 @@ export const registerNewCourse = async (StudentID, CourseID, Term, RegisteredAt)
 } 
 
 //Admin 
-// Example: get a single user by username
+//get a single user by username
 export const getUserByUsername = async (Username) => {
   const pool = await poolPromise;
 
-  // TODO: change 'Users', 'username', and other column names
   const result = await pool.request()
     .input('Username', sql.VarChar, Username)
     .query(`
@@ -74,7 +73,7 @@ export const getUserByUsername = async (Username) => {
       WHERE Username = @Username
     `);
 
-  return result.recordset[0]; // undefined if not found
+  return result.recordset[0];
 };
 
 //Admin
@@ -146,3 +145,67 @@ export const getAllContactMessages = async () => {
 
   return result.recordset;
 }
+
+//non user
+//get all course
+export const getCourses = async () => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+      SELECT CourseID, CourseCode, Name, Term, Description, StartDate, EndDate, ProgramCode
+      FROM courses
+    `);
+    return result.recordset
+  } catch (err) {
+    console.error('Get courses error:', err);
+    res.status(500).json({ message: 'Server error while fetching courses.' });
+  }
+};
+
+//non user
+//get all search courses
+export const searchCourses = async (term, q) => {
+  try {
+    const pool = await poolPromise;
+    const request = pool.request();
+
+    let queryText = `
+      SELECT CourseID, CourseCode, Name, Term, Description, StartDate, EndDate, ProgramCode
+      FROM courses
+      WHERE 1 = 1
+    `;
+
+    if (term) {
+      queryText += ' AND Term = @Term';
+      request.input('Term', sql.NVarChar, term);
+    }
+
+    if (q) {
+      queryText += ' AND (CourseCode LIKE @Q OR Name LIKE @Q)';
+      request.input('Q', sql.NVarChar, `%${q}%`);
+    }
+
+    const result = await request.query(queryText);
+    return result.recordset
+  } catch (err) {
+    console.error('Search courses error:', err);
+    res.status(500).json({ message: 'Server error while searching courses.' });
+  }
+};
+
+//non user
+//get all program
+export const getPrograms = async () => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request()
+    .query(`
+      SELECT ProgramCode, Name, Term, Description, StartDate, EndDate, FeesDomestic, FeesInternational
+      FROM programs
+    `);
+    return result.recordset
+  } catch (err) {
+    console.error('Get programs error:', err);
+    res.status(500).json({ message: 'Server error while fetching programs.' });
+  }
+};

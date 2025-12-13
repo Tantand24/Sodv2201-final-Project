@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import config from '../config/config.js';
+
 
 // Protect routes: require a valid JWT token
 export const protect = (req, res, next) => {

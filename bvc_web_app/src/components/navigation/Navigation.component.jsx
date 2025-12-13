@@ -26,7 +26,6 @@ function Nav() {
             <button className="btn alt" onClick={logout}>Logout</button>
           </>
         )}
-        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </div>
   )

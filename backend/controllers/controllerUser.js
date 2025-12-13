@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt'; //password hashing
 import generateToken from '../../../my-app-backend-authentication-session-management/utils/generateToken';  //used to generate JWT tokens
-import { getAllUserCourses, registerStudent, newContactMessage, registerNewCourse} from '../models/dbmodel';
+import { getAllUserCourses, registerStudent, newContactMessage, registerNewCourse, getUserByUsername, getAllcourse, searchCourses} from '../models/dbmodel';
 import { use } from 'react';
 //TODO - work on log in, log out
 
 //controller to get user's courses
-export const getUserCourses = async (requestAnimationFrame, res) => {
+export const getUserCourses = async (req, res) => {
     try {
         const studentID = req.body;
 
@@ -26,9 +26,9 @@ export const registerStudentController = async (req, res) => {
             return res.status(400).json({message: 'All fields are required'});
         }
 
-        // const hashedPassword = await bcrypt.hash(password, 10)   //later use
+        const hashedPassword = await bcrypt.hash(password, 10)
 
-        await registerStudent(username, password, firstName, lastName, email, phone, birthday, department, program);
+        await registerStudent(username, hashedPassword, firstName, lastName, email, phone, birthday, department, program);
 
         res.status(201).json({message: 'User created successfully'});
     }
@@ -73,11 +73,6 @@ export const registerNewContactMessage = async (req, res) => {
     }
 }
 
-//log out - TODO
-
-
-import { getUserByUsername } from '../models/dbmodel.js';
-
 // POST /api/auth/login
 // Handles student login
 export const loginUser = async (req, res) => {
@@ -96,7 +91,6 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // TODO: update 'passwordHash' to match your actual column name
     const isMatch = await bcrypt.compare(password, user.passwordHash);
 
     if (!isMatch) {
@@ -129,3 +123,50 @@ export const loginUser = async (req, res) => {
     return res.status(500).json({ message: 'Server error' });
   }
 };
+
+//get student profile
+export const getProfile = async (req, res) => {
+  // authMiddleware already fetched the user and attached to req.user
+  res.json({ user: req.user });
+};
+
+// get all courses
+export const getAllCourse = async (req, res) => {
+  try {
+      const courselist = await getAllcourse();
+
+      res.status(201).json({courselist});
+  }
+  catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to post message' });
+  }
+}
+
+//search courses
+export const searchCourse = async (req, res) => {
+  const {term, q} = req.body;
+
+  try {
+    const courselist = await searchCourses(term, q);
+
+    res.status(201).json({courselist});
+  }
+  catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to post message' });
+  }
+}
+
+//get all programs
+export const getAllprogram = async (req, res) => {
+  try {
+      const programlist = await getAllprogram();
+
+      res.status(201).json({programlist});
+  }
+  catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to post message' });
+  }
+}

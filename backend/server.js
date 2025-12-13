@@ -1,6 +1,6 @@
 import express from 'express'
 import cookieParser from 'cookies-parser'
-import config from './config/config.js'
+import config from './config.js';
 import routes from './routes/routes.js'
 
 const app = express();
